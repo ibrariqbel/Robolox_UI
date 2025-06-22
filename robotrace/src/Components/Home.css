@@ -1,0 +1,12 @@
+.container-light{
+    background-color: antiquewhite;
+    color: black;
+    min-height: 90vh;
+    padding: 100px;
+}
+.container-dark{
+    background-color: rgb(27, 25, 25);
+    color: white;
+    min-height: 90vh;
+    padding: 100px;
+}
