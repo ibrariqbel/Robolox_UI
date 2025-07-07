@@ -1,5 +1,5 @@
-import React from 'react'
-import IsAuthrizor from './Utils/IsAuthorized'
+
+import IsAuthrizor from '../Utils/IsAuthorized'
 
 const SecureProfile = () => {
    IsAuthrizor();

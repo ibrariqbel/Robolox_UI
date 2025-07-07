@@ -1,37 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { FaLock } from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
+import { context } from "../Context/Store";
 
-const Login = (props) => {
+
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const url = "http://localhost:4000/user/login"
-   const handlerLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(url, {
-        email,
-        password,
-      });
 
-      if (data.message === "Logged in Succesfully") {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("UserId", data.userId);
-        props.setLoggIn(true);
-        toast.success(data.message);
-        navigate("/");
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Login failed");
-    }
+  const FormData = {
+    email,
+    password,
   };
+const {handlerLogin} = useContext(context);
 
   return (
     <>
@@ -42,7 +27,7 @@ const Login = (props) => {
             <FaLock className="lock-icon" />
           </div>
           <h3>Login to Your Account</h3>
-          <form onSubmit={handlerLogin}>
+          <form>
             <input
               type="text"
               placeholder="Enter Your Email"
@@ -60,7 +45,7 @@ const Login = (props) => {
             <p className="note">
               <Link to="/user/forgotpass">Forgot your password?</Link>
             </p>
-            <button type="submit">Login</button>
+            <button onClick={(e)=>{handlerLogin(e, FormData)}}>Login</button>
             <p className="note">
               Don't have an account? <Link to="/user/register">Register</Link>
             </p>

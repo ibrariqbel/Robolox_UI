@@ -1,13 +1,15 @@
-import axios from "axios";
-import React, { useState } from "react";
+
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { FaLock } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
+import { context } from "../Context/Store";
 
 
 const ResetPass = () => {
-
+  
+  const {handleChangePass} = useContext(context);
   const [formData, setFormData] = useState({
     newPass: "",
     confirmPass: ""
@@ -20,31 +22,7 @@ const ResetPass = () => {
       [name]: value
     }));
   };
-  const url = `http://localhost:4000/user/password/reset/${userId}`;
-
-  const handleChangePass = async (e) => {
-    e.preventDefault();
-   
-    try {
-      const res = await axios.put(url, formData);
-     
-       console.log(res);
-    if (res.status === 200) {
-     toast.success(res.data.message);
-    }else{
-      toast.error(res.data.message)
-    }
-
-      
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-      if(error.response.status === 500){
-        toast.error("Server Error!")
-      }else if(error.response.status === 500){
-        toast.error("Bad Request!")
-      }
-    }
-  };
+ 
 
 
 
@@ -60,7 +38,7 @@ const ResetPass = () => {
           <p className="note">
             Kindly enter a new password which you haven’t used in the last 6 months.
           </p>
-          <form onSubmit={handleChangePass}>
+          <form >
             <input
               type="password"
               name="newPass"
@@ -80,7 +58,7 @@ const ResetPass = () => {
             <p className="note">
               Use at least 8 characters, one uppercase, and one special character.
             </p>
-            <button type="submit">Change Password</button>
+            <button onClick={(e)=>{handleChangePass(e, formData, userId)}}>Change Password</button>
             <br /><br />
 
              <button type="submit"><Link to="/user/login" element={<ResetPass/>}>Login</Link></button>

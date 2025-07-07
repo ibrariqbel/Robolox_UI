@@ -1,3 +1,11 @@
+$tertiary : #0c1524;
+$secondry: #494444;
+$primary: #fefaf0;
+
+$textColor : #E53737;
+$TextBg : #ffc2b0;
+$buttonBg : #ff8159;
+
 body{
     margin: 0px;
     padding: 0px;
@@ -7,10 +15,7 @@ body{
 
 .main{
     min-height: 90vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large; */
+    background-color:tertiar ;
 }
 .container{
     min-height: 90vh;

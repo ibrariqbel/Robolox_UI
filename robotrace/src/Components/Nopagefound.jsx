@@ -1,5 +1,6 @@
 import React from 'react'
-import "./../global.css";
+import '../global.scss';
+
 const Nopagefound = () => {
   return (
     <div className='container'>

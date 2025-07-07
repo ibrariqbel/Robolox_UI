@@ -1,33 +1,20 @@
-import axios from "axios";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { FaLock } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
-import ResetPass from "./ResetPass";
 
+import { context } from "../Context/Store";
 
 const ForgotPass = () => {
+  const { handleForgotPass } = useContext(context);
   const [email, setEmail] = useState("");
-  const url = "http://localhost:4000/user/forgotpass";
-
-  const handleForgotPass = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(url, { email });
-      if (res.status === 200) {
-        toast.success(res.data.message);
-      } else {
-        toast.error(res.data.message);
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
-    }
-  };
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer 
+      position="top-center"
+      />
       <div className="auth-container">
         <div className="auth-box">
           <div className="icon-circle">
@@ -38,7 +25,7 @@ const ForgotPass = () => {
             Enter your registered email address. We'll send you a link to reset
             your password.
           </p>
-          <form onSubmit={handleForgotPass}>
+          <form>
             <input
               type="email"
               placeholder="Enter Your Email"
@@ -46,10 +33,15 @@ const ForgotPass = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit">Send Reset Link</button>
+            <button
+              onClick={(e) => {
+                handleForgotPass(e, email);
+              }}
+            >
+              Send Reset Link
+            </button>
             <p className="note">
               Remembered your password? <Link to="/user/login">Login</Link>
-             
             </p>
           </form>
         </div>

@@ -1,12 +1,249 @@
-.container-light{
-    background-color: antiquewhite;
-    color: black;
-    min-height: 90vh;
-    padding: 100px;
+/* --- Global Base Styles & Transitions --- */
+body {
+  font-family: 'Montserrat', sans-serif; /* A modern, professional typeface */
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden; /* Prevents horizontal scroll from animations */
 }
-.container-dark{
-    background-color: rgb(27, 25, 25);
-    color: white;
-    min-height: 90vh;
-    padding: 100px;
+
+/* --- Container Backgrounds (Light & Dark Modes with Subtle Gradients) --- */
+.container-light {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* Very light, subtle grey gradient */
+  color: #212529; /* Darker text for contrast */
+}
+
+.container-dark {
+  background: linear-gradient(135deg, #212529 0%, #343a40 100%); /* Deep charcoal to dark grey gradient */
+  color: #f8f9fa; /* Light text for contrast */
+}
+
+/* --- Text Gradients for Headings (Modern Touch) --- */
+.text-gradient-primary {
+  background: linear-gradient(45deg, #007bff, #6610f2); /* Blue to Purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Fallback */
+}
+
+/* --- Highlight Text in Hero (Service Provider Specific) --- */
+.highlight-text {
+  font-weight: 700;
+  background: linear-gradient(45deg, #28a745, #20c997); /* Green Gradient for highlight */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Fallback */
+}
+.container-dark .highlight-text {
+  background: linear-gradient(45deg, #17a2b8, #00d4ff); /* Cyan gradient in dark mode */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* --- Hero Section Styling (Bold Gradient Background with Image) --- */
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 600px; /* More imposing height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Deeper, more defined shadow */
+}
+.hero-section h1, .hero-section p {
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6); /* More prominent text shadow */
+}
+
+/* --- Custom Button Styles for Scale Effect & Pill Shape --- */
+.custom-btn-scale {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  border-radius: 50px;
+  padding: 18px 45px; /* Larger padding for a more substantial button */
+  font-weight: 700; /* Bolder text */
+  letter-spacing: 0.8px; /* More pronounced letter spacing */
+  text-transform: uppercase;
+  border-width: 2px; /* Thicker border for outline buttons */
+}
+
+.custom-btn-scale:hover {
+  transform: translateY(-3px) scale(1.03); /* Subtle lift and slight scale */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* Enhanced shadow on hover */
+}
+
+/* --- Why Choose Us Section --- */
+.why-choose-us-list li {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.why-choose-us-list li .text-success {
+    font-size: 1.3rem; /* Larger checkmark icon */
+    vertical-align: middle;
+}
+.img-fluid.rounded-4.border {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.img-fluid.rounded-4.border:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+/* --- Service Card Styling --- */
+.service-card-col {
+  display: flex; /* Ensures cards in a row have equal height */
+}
+
+.card.h-100 {
+  border-radius: 1.25rem; /* Even more rounded */
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Refined shadow */
+}
+
+.container-dark .card.h-100 {
+  background-color: #3b506b;
+  color: #ecf0f1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.card.h-100:hover {
+  transform: translateY(-12px); /* Significant lift */
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.35) !important; /* Very strong shadow on hover */
+}
+.container-dark .card.h-100:hover {
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6) !important;
+}
+
+.card-img-top {
+    height: 220px; /* Consistent height for service images */
+    object-fit: cover; /* Crops images to fit */
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05); /* Subtle zoom on image hover */
+}
+
+.card-body {
+  padding: 2.5rem; /* Generous padding for content */
+  display: flex;
+  flex-direction: column;
+}
+
+.service-icon {
+  transition: transform 0.3s ease-in-out, color 0.3s ease;
+  filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.25)); /* More pronounced icon shadow */
+}
+
+.service-card-col:hover .service-icon {
+  transform: scale(1.25) rotate(10deg);
+  color: #fd7e14 !important; /* Orange accent on hover */
+  filter: drop-shadow(5px 5px 8px rgba(0,0,0,0.4));
+}
+
+/* --- Call to Action Section (Vibrant Gradient Background) --- */
+.cta-section {
+  background: linear-gradient(135deg, #17a2b8 0%, #1abc9c 100%); /* Cyan to Teal gradient */
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.4); /* Shadow to separate from above content */
+}
+.container-dark .cta-section {
+  background: linear-gradient(135deg, #007bff 0%, #6f42c1 100%); /* Blue to Purple in dark mode */
+}
+
+.cta-section h2, .cta-section p {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Dark/Light Mode Toggle Button --- */
+.btn-dark-mode-toggle {
+  background-color: #495057; /* Medium dark grey */
+  color: #ffffff;
+  border: 1px solid #6c757d;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-dark-mode-toggle:hover {
+  background-color: #343a40;
+  border-color: #343a40;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  color: #00c6ff;
+}
+
+.btn-light-mode-toggle {
+  background-color: #e9ecef; /* Light grey */
+  color: #343a40;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-light-mode-toggle:hover {
+  background-color: #dee2e6;
+  border-color: #dee2e6;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  color: #6f42c1;
+}
+
+/* --- Footer --- */
+footer {
+  border-color: rgba(0, 0, 0, 0.15) !important; /* Slightly stronger border */
+  background-color: rgba(0, 0, 0, 0.03); /* Very subtle background */
+  padding: 2rem 0; /* More padding */
+}
+.container-dark footer {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+footer a {
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+footer a:hover {
+    color: #007bff !important;
+}
+.container-dark footer a:hover {
+    color: #00c6ff !important;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
+  .hero-section {
+    min-height: 450px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+  .custom-btn-scale {
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+  .card-body {
+    padding: 2rem;
+  }
+  .service-icon {
+      font-size: 65px !important;
+  }
 }

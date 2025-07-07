@@ -1,32 +1,23 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import {  ToastContainer } from "react-toastify";
+import { Link} from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import "./Register.css"; // Use the same CSS file as login
+import { context } from "../Context/Store";
 
 const Register = () => {
+ const {handelRegister} = useContext(context);
+ 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const url = "http://localhost:4000/user/register";
-
-  const handelRegister = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(url, { username, email, password });
-      toast.success(response.data.message);
-      if (response.data.message === "user craeted Successfully") {
-        navigate("/user/login");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.message || "Server Error");
-    }
-  };
+  const formData = {
+    username,
+    email,
+    password 
+  }
 
   return (
     <>
@@ -37,7 +28,7 @@ const Register = () => {
             <FaLock className="lock-icon" />
           </div>
           <h3>Create a New Account</h3>
-          <form onSubmit={handelRegister}>
+          <form>
             <input
               type="text"
               placeholder="Enter Username"
@@ -59,7 +50,7 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit">Register</button>
+            <button onClick={(e)=>{handelRegister(e, formData)}}>Register</button>
             <p className="note">
               Already have an account? <Link to="/user/login">Login</Link>
             </p>
